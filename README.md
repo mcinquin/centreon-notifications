@@ -21,6 +21,4 @@ centreon-notifications
 ![service.png](https://raw.githubusercontent.com/seancdugan/nagios-notifications/master/service.png)
 
 ## Credits
-* nagios-notifications were originally written by seancdugan at https://github.com/seancdugan/nagios-notifications and I made some of my own changes to adapt to Centreon.
-
-* host_email and service_email were originally written by shawnbrito at http://exchange.nagios.org/directory/Addons/Notifications/Send-HTML-Alert-Email-v2/details and I made some of my own tweaks to better suit my needs.
+* centreon-notifications is a fork of nagios-notifications. nagios-notifications is originally written by seancdugan at [nagios-notifications](https://github.com/seancdugan/nagios-notifications).
