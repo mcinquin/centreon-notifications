@@ -70,7 +70,7 @@
     $f_serv_output = str_replace("[","/",$f_serv_output);
     $f_serv_output = str_replace("]","/",$f_serv_output);
 
-    $subject = "[CENTREON] $f_notify_type Service:$f_host_name/$f_serv_desc [$f_serv_state]";
+    $subject = "[CENTREON] $f_notify_type $f_host_name/$f_serv_desc [$f_serv_state]";
     $url = "https://centreon.yourdomain.com:8081";
     $token = "PpaktymnW";
     $user = "guest";
