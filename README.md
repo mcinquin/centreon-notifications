@@ -17,8 +17,8 @@ centreon-notifications
 7. Generate, move and export the new configuration on your all pollers
 
 ## Screenshots
-![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/host-email.png)
-![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/service-email.png)
+![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/host-email.png)
+![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/service-email.png)
 
 ## Credits
 * centreon-notifications is a fork of nagios-notifications. nagios-notifications is originally written by seancdugan at [nagios-notifications](https://github.com/seancdugan/nagios-notifications).
