@@ -1,9 +1,9 @@
-#!/usr/local/bin/perl
+#!/bin/perl
 
 ###
 ## Version  Date      Author    Description
 ##----------------------------------------------
-## 0.1      11/10/15  Shini31   0.1 dev release
+## 1.0      22/11/15  Shini31   1.0 stable release
 ##
 ####
 
@@ -13,25 +13,99 @@ use warnings;
 use HTTP::Request::Common qw(POST);
 use LWP::UserAgent;
 use JSON;
-use Getopt::Std;
+use Getopt::Long;
 
 # Global Variables
+## Version
+my $version = "1.0";
+my $change_date = "22/11/2015";
+
+## Slack
 my $slack_posturl = 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX';
-my $default_channel = '#centreon';
-my $emoji_post = ':vertical_traffic_light:';
+my $slack_channel = '#notifications';
+my $slack_emoji_post = ':vertical_traffic_light:';
 my $slack_username = 'centreon';
-my %payload;
 
+my $slack_payload = {
+           channel => $slack_channel,
+           username => $slack_username,
+           icon_emoji => $slack_emoji_post,
+};
+
+## Centreon
+my $centreon_url = "https://centreon.yourdomain.com:8081";
+
+
+
+# Options
+my %options;
+GetOptions (\%options,'host:s','state:s', 'address:s');
+
+if (!defined($options{host})) {
+    print "Need --state option\n";
+    exit 1;
+}
+
+if (!defined($options{state})) {
+    print "Need --state option\n";
+    exit 1;
+}
+
+if (!defined($options{address})) {
+    print "Need --address option\n";
+    exit 1;
+}
+
+
+# Notification text
+if ($options{host} eq 'UP') {
+    $slack_payload->{attachments} = [
+        {
+            fallback => 'Host' . $options{host} . ' is ' . $options{state},
+            color => 'good',
+            fields => [
+                {
+                    title => 'Host',
+                    value => $options{host},
+                    short => 'true',
+                },
+            ]
+        },
+    ],
+} else {
+    $slack_payload->{attachments} = [
+        {
+            fallback => 'Host ' . $options{host} . ' is ' . $options{state} . ': ' . $centreon_url . '/centreon/main.php?p=20102&o=hd&host_name=' . $options{host},
+            text => '<' . $centreon_url . '/centreon/main.php?p=20102&o=hd&host_name=' . $options{host} . '|Host ' . $options{host} . ' is ' . $options{state} . '>',
+            color => 'danger',
+            fields => [
+                {
+                    title => 'Host',
+                    value => $options{host},
+                    short => 'true',
+                },
+                {
+                    title => 'Address',
+                    value => $options{address},
+                    short => 'true,'
+                },
+            ]
+        },
+    ],
+}
+
+
+
+# HTTP Request
 my $ua = LWP::UserAgent->new;
-$ua->timeout(5);
+$ua->timeout(15);
 
-my $req = POST("${slack_posturl}", ['payload' => encode_json($payload)]);
+my $req = POST($slack_posturl, ['payload' => encode_json($slack_payload)]);
 
 my $response = $ua->request($req);
 
 if ($response->is_success) {
     exit(0);
-}
-else {
-  die $resp->status_line;
+} else {
+  die $response->status_line;
 }
