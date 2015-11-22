@@ -16,8 +16,8 @@ centreon-notifications
 5. Generate, move and export the new configuration on your all pollers
 
 # Screenshots
-![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/host-email.png)
-![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/service-email.png)
+![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/host_email.png)
+![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/mail/service_email.png)
 
 # Credits
 * centreon-notifications is a fork of nagios-notifications. nagios-notifications is originally written by seancdugan at [nagios-notifications](https://github.com/seancdugan/nagios-notifications).
@@ -34,11 +34,11 @@ centreon-notifications
     * $slack_username : Integration's username (eg. Centreon)
 3. Make the files executable.
 4. Create two new notification's command, host-notify-by-slack and service-notify-by-slack :
-    * `$USER1$/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$"` 
+    * `$USER1$/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$"`
     * `$USER1$/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$"`
 5. Adapt your notification's configuration for using theses new commands
 6. Generate, move and export the new configuration on your all pollers
 
 # Screenshots
-![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/slack/host-slack.png)
-![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/slack/service-slack.png)
+![host.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/slack/host_slack.png)
+![service.png](https://raw.githubusercontent.com/Shini31/centreon-notifications/master/slack/service_slack.png)
