@@ -33,8 +33,6 @@
 
     $subject = "[CENTREON] $f_notify_type Host:$f_host_name";
     $url = "https://centreon.yourdomain.com:8081";
-    $token = "PpaktymnW";
-    $user = "guest";
 
     $from  ="centreon@yourdomain.com";
     $body = "<html><body><table border=0 width='98%' cellpadding=0 cellspacing=0><tr><td valign='top'>\r\n";
@@ -43,13 +41,13 @@
     if($f_ackauthor!="" && $f_ackcomment!=""){
         $body .= "<tr bgcolor=$f_color><td width='140'><b><font color=#ffffff>$f_ackauthor:</font></b></td><td><font color=#ffffff><b>$f_ackcomment</b></font></td></tr>\r\n";
     }
-    $body .= "<tr bgcolor=#eeeeee><td><b>Hostname: </b></td><td><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name&autologin=1&useralias=$user&token=$token'>$f_host_alias</a></b></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Hostname: </b></td><td><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Address: </b></td><td><b>$f_host_address</b></td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td><b>Date/Time: </b></td><td>$f_long_date</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Info: </b></td><td><font color=$f_color>$f_host_output</font></td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td><b>Total Hosts Up: </b></td><td>$f_totalup</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Total Hosts Down: </b></td><td>$f_totaldown</td></tr>\r\n";
-    $body .= "<tr bgcolor=#eeeeee><td><b>Actions: </b></td><td><a href='$url/centreon/main.php?p=20201&o=hd&host_name=$f_host_name&autologin=1&useralias=$user&token=$token'><b>Acknowledge</b></a></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Actions: </b></td><td><a href='$url/centreon/main.php?p=20201&o=hd&host_name=$f_host_name'><b>Acknowledge</b></a></td></tr>\r\n";
     $body .= "</table></table></body></html> \r\n";
 
     $headers = "From: $from\r\n";

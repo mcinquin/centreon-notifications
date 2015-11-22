@@ -72,8 +72,6 @@
 
     $subject = "[CENTREON] $f_notify_type $f_host_name/$f_serv_desc [$f_serv_state]";
     $url = "https://centreon.yourdomain.com:8081";
-    $token = "PpaktymnW";
-    $user = "guest";
 
     $from = "centreon@yourdomain.com";
     $body = "<html><body><table border=0 width='98%' cellpadding=0 cellspacing=0><tr><td valign='top'>\r\n";
@@ -83,13 +81,13 @@
     if($f_ackauthor!="" && $f_ackcomment!=""){
         $body .= "<tr bgcolor=$f_color><td width='140'><b><font color=#ffffff>$f_ackauthor:</font></b></td><td><font color=#ffffff><b>$f_ackcomment</b></font></td></tr>\r\n";
     }
-    $body .= "<tr bgcolor=#eeeeee><td><b>Service:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php?p=20201&o=svcd&host_name=$f_host_name&service_description=$f_serv_desc&autologin=1&useralias=$user&token=$token'>$f_serv_desc</a></b></font></td></tr>\r\n";
-    $body .= "<tr bgcolor=#fefefe><td><b>Nagios Source:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php&autologin=1&useralias=$user&token=$token'>$url</a></b></font></td></tr>\r\n";
-    $body .= "<tr bgcolor=#eeeeee><td><b>Server:</b></td><td><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name&autologin=1&useralias=$user&token=$token'>$f_host_alias</a></b></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Service:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php?p=20201&o=svcd&host_name=$f_host_name&service_description=$f_serv_desc'>$f_serv_desc</a></b></font></td></tr>\r\n";
+    $body .= "<tr bgcolor=#fefefe><td><b>Nagios Source:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php'>$url</a></b></font></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Server:</b></td><td><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Address:</b></td><td><b>$f_host_address</b></font></td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td><b>Date/Time:</b></td><td>$f_long_date UTC</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Additional Info:</b></td><td><font color=$f_color>$f_serv_output</font></td></tr>\r\n";
-    $body .= "<tr bgcolor=#eeeeee><td><b>Commands:</b></td><td><a href='$url/centreon/main.php?p=20201&o=svcd&host_name=$f_host_name&service_description=$f_serv_desc&autologin=1&useralias=$user&token=$token'><b>Acknowledge</b></a></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Commands:</b></td><td><a href='$url/centreon/main.php?p=20201&o=svcd&host_name=$f_host_name&service_description=$f_serv_desc'><b>Acknowledge</b></a></td></tr>\r\n";
     $body .= "</td><td valign='top'></tr></table><table border=0 cellpadding=0 cellspacing=0 width='96%'><tr bgcolor=#000055><td width='140'><b> \r\n";
     $body .= "<font color=#FFFFFF>Service Summary</font></b></td><td>.</td></tr> \r\n";
     $body .= "<tr bgcolor=#fefefe><td>Service <i><b>DOWN</b></i> For: </td><td> $f_downwarn<i>m</i></td></tr>\r\n";

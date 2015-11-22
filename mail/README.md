@@ -7,8 +7,6 @@ centreon-notifications
 2. Download the scripts in the plugins directory and modify these following variables :
     * $url : URL of the Centreon Web UI ( eg. https://centreon.foo.bar:8081 )
     * $from : from email address desired
-    * $user : Centreon's login user
-    * $token : Token for autologin
 3. Make the files executable.
 4. On distributed platform, don't miss to install php on your pollers
 6. Change the command line for host-notify-by-email and service-notify-by-email notification's command :
