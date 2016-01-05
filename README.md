@@ -30,13 +30,12 @@ centreon-notifications
 2. Download the scripts in the plugins directory and modify these following variables :
     * $centreon_url : URL of the Centreon Web UI ( eg. https://centreon.foo.bar:8081 )
     * $slack_posturl : URL of incoming webhook ( eg. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX )
-    * $slack_channel : Slack Channel ( eg. #centreon )
     * $slack_username : Integration's username (eg. Centreon)
 3. Don't miss install the following Perl modules : HTTP::Request::Common, LWP::UserAgent, JSON, Getopt::Long.
 4. Make the files executable.
 5. Create two new notification's command, host-notify-by-slack and service-notify-by-slack :
-    * `$USER1$/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$"`
-    * `$USER1$/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$"`
+    * `$USER1$/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$" --channel="#channelofyourchoice"`
+    * `$USER1$/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$" --channel="#channelofyourchoice"`
 6. Adapt your notification's configuration for using theses new commands
 7. Generate, move and export the new configuration on your all pollers
 

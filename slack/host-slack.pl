@@ -23,7 +23,6 @@ my $change_date = "31/12/2015";
 
 ## Slack
 my $slack_posturl = 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX';
-my $slack_channel = '#notifications';
 my $slack_emoji_post = ':vertical_traffic_light:';
 my $slack_username = 'centreon';
 
