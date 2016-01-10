@@ -5,6 +5,7 @@
 ##----------------------------------------------
 ## 1.0      22/11/15  Shini31   1.0 stable release
 ## 1.1	    31/12/15  Cjudith   1.1 minor release
+## 1.2      09/01/16  Shini31   1.2 minor release
 ##
 ####
 
@@ -15,23 +16,20 @@ use HTTP::Request::Common qw(POST);
 use LWP::UserAgent;
 use JSON;
 use Getopt::Long;
+use Config::General;
+use FindBin qw($Bin);
+use lib "$Bin/../lib";
 
 # Global Variables
 ## Version
-my $version = "1.1";
-my $change_date = "31/12/2015";
-
-## Slack
-my $slack_posturl = 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX';
-my $slack_emoji_post = ':vertical_traffic_light:';
-my $slack_username = 'centreon';
-
-## Centreon
-my $centreon_url = "https://centreon.yourdomain.com:8081";
+my $version = "1.2";
+my $change_date = "09/01/2016";
 
 # Options
 my %options;
 GetOptions (\%options,'host:s', 'output:s', 'service:s', 'state:s', 'address:s', 'channel:s');
+my $configuration = Config::General->new($Bin.'/config.ini');
+my %conf = $configuration->getall;
 
 if (!defined($options{host})) {
     print "Need --host option\n";
@@ -65,8 +63,8 @@ if (!defined($options{channel})) {
 
 my $slack_payload = {
            channel => $options{channel},
-           username => $slack_username,
-           icon_emoji => $slack_emoji_post,
+           username => $conf{slack_username},
+           icon_emoji => $conf{slack_emoji_post},
 };
 
 # Notification text
@@ -92,8 +90,8 @@ if ($options{state} eq 'RECOVERY') {
 } elsif ($options{state} eq 'WARNING') {
     $slack_payload->{attachments} = [
         {
-            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
-            text => '<' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
+            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
+            text => '<' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
             color => 'warning',
             fields => [
                 {
@@ -117,8 +115,8 @@ if ($options{state} eq 'RECOVERY') {
 } elsif ($options{state} eq 'CRITICAL') {
     $slack_payload->{attachments} = [
         {
-            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
-            text => '<' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
+            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
+            text => '<' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
             color => 'danger',
             fields => [
                 {
@@ -142,8 +140,8 @@ if ($options{state} eq 'RECOVERY') {
 } elsif ($options{state} eq 'UNKNOWN') {
     $slack_payload->{attachments} = [
         {
-            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
-            text => '<' . $centreon_url . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
+            fallback => 'Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . ': ' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service},
+            text => '<' . $conf{centreon_url} . '/centreon/main.php?p=20201&o=svcd&host_name=' . $options{host} . '&service_description=' . $options{service} . '|Service ' . $options{service} . ' (Host: ' . $options{host} . ') is ' . $options{state} . '>',
             color => '#DCDADA',
             fields => [
                 {
@@ -172,7 +170,7 @@ if ($options{state} eq 'RECOVERY') {
 my $ua = LWP::UserAgent->new;
 $ua->timeout(15);
 
-my $req = POST($slack_posturl, ['payload' => encode_json($slack_payload)]);
+my $req = POST($conf{slack_posturl}, ['payload' => encode_json($slack_payload)]);
 
 my $response = $ua->request($req);
 

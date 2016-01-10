@@ -1,0 +1,4 @@
+slack_posturl = https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+slack_emoji_post = :vertical_traffic_light:
+slack_username = centreon
+centreon_url = https://centreon.yourdomain.com:8081
