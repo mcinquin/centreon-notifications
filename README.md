@@ -27,15 +27,16 @@ centreon-notifications
 # Setup
 
 1. Set up an incoming webhook integration in your Slack team : [Slack incoming webhook integration](https://api.slack.com/incoming-webhooks)
-2. Download the scripts in the plugins directory and modify these following variables :
-    * $centreon_url : URL of the Centreon Web UI ( eg. https://centreon.foo.bar:8081 )
-    * $slack_posturl : URL of incoming webhook ( eg. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX )
-    * $slack_username : Integration's username (eg. Centreon)
-3. Don't miss install the following Perl modules : HTTP::Request::Common, LWP::UserAgent, JSON, Getopt::Long.
-4. Make the files executable.
+2. Download the scripts in the plugins directory
+3. Take config.ini.example as a template, create a file config.ini in same directory and correct configuration according to your preferences:
+    * centreon_url : URL of the Centreon Web UI ( eg. https://centreon.foo.bar:8081 )
+    * slack_posturl : URL of incoming webhook ( eg. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX )
+    * slack_username : Integration's username (eg. Centreon)
+    * slack_emoji_post : Emoji for each post
+4. Don't miss install the following Perl modules : HTTP::Request::Common, LWP::UserAgent, JSON, Getopt::Long.
 5. Create two new notification's command, host-notify-by-slack and service-notify-by-slack :
-    * `$USER1$/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$" --channel="#channelofyourchoice"`
-    * `$USER1$/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$" --channel="#channelofyourchoice"`
+    * `perl /directoryofplugins/centreon-notifications/slack/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$" --channel="#channelofyourchoice"`
+    * `perl /directoryofplugins/centreon-notifications/slack/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$" --channel="#channelofyourchoice"`
 6. Adapt your notification's configuration for using theses new commands
 7. Generate, move and export the new configuration on your all pollers
 
