@@ -33,7 +33,7 @@ centreon-notifications
     * slack_posturl : URL of incoming webhook ( eg. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX )
     * slack_username : Integration's username (eg. Centreon)
     * slack_emoji_post : Emoji for each post
-4. Don't miss install the following Perl modules : HTTP::Request::Common, LWP::UserAgent, JSON, Getopt::Long.
+4. Don't miss install the following Perl modules : HTTP::Request::Common, LWP::UserAgent, JSON, Getopt::Long, Config::General.
 5. Create two new notification's command, host-notify-by-slack and service-notify-by-slack :
     * `perl /directoryofplugins/centreon-notifications/slack/host-slack.pl --host="$HOSTNAME$" --state="$HOSTSTATE$" --address="$HOSTADDRESS$" --channel="#channelofyourchoice"`
     * `perl /directoryofplugins/centreon-notifications/slack/service-slack --host="$HOSTNAME$" --address="$HOSTADDRESS$" --output="$SERVICEOUTPUT$" --service="$SERVICEDESC$" --state="$SERVICESTATE$" --channel="#channelofyourchoice"`
