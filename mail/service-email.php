@@ -39,7 +39,7 @@
     if($f_serv_state=="WARNING") {$f_color="#f48400";}
     if($f_serv_state=="CRITICAL") {$f_color="#f40000";}
     if($f_serv_state=="OK") {$f_color="#00b71a";}
-    if($f_serv_state=="UNKNOWN") {$f_color="#cc00de";}
+    if($f_serv_state=="UNKNOWN") {$f_color="#666666";}
 
     // Check If File Exists ###########
     if($f_notify_type=="PROBLEM")
@@ -83,7 +83,7 @@
         $body .= "<tr bgcolor=$f_color><td width='140'><b><font color=#ffffff>$f_ackauthor:</font></b></td><td><font color=#ffffff><b>$f_ackcomment</b></font></td></tr>\r\n";
     }
     $body .= "<tr bgcolor=#eeeeee><td><b>Service:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php?p=20201&o=svcd&host_name=$f_host_name&service_description=$f_serv_desc'>$f_serv_desc</a></b></font></td></tr>\r\n";
-    $body .= "<tr bgcolor=#fefefe><td><b>Host:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
+    $body .= "<tr bgcolor=#fefefe><td><b>Host:</b></td><td><font color=#0000CC><b><a href='$url/centreon/main.php?p=20202&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Address:</b></td><td><b>$f_host_address</b></font></td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td><b>Date/Time:</b></td><td>$f_long_date UTC</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Additional Info:</b></td><td><font color=$f_color>$f_serv_output</font></td></tr>\r\n";
@@ -94,7 +94,7 @@
     $body .= "<tr bgcolor=#eeeeee><td>Total Warnings: </td><td> $f_totwarnings</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td>Total Critical: </td><td> $f_totcritical</td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td>Total Unknowns: </td><td> $f_totunknowns</td></tr>\r\n";
-    $body .= "</body></html> \r\n";
+    $body .= "</table></table></body></html> \r\n";
 
     $headers  = "From: $from\r\n";
     $headers .= "Content-type: text/html\r\n";

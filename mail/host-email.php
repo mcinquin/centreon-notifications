@@ -41,7 +41,7 @@
     if($f_ackauthor!="" && $f_ackcomment!=""){
         $body .= "<tr bgcolor=$f_color><td width='140'><b><font color=#ffffff>$f_ackauthor:</font></b></td><td><font color=#ffffff><b>$f_ackcomment</b></font></td></tr>\r\n";
     }
-    $body .= "<tr bgcolor=#eeeeee><td><b>Hostname: </b></td><td><b><a href='$url/centreon/main.php?p=20102&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
+    $body .= "<tr bgcolor=#eeeeee><td><b>Hostname: </b></td><td><b><a href='$url/centreon/main.php?p=20202&o=hd&host_name=$f_host_name'>$f_host_alias</a></b></td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Address: </b></td><td><b>$f_host_address</b></td></tr>\r\n";
     $body .= "<tr bgcolor=#eeeeee><td><b>Date/Time: </b></td><td>$f_long_date</td></tr>\r\n";
     $body .= "<tr bgcolor=#fefefe><td><b>Info: </b></td><td><font color=$f_color>$f_host_output</font></td></tr>\r\n";
@@ -59,7 +59,3 @@
 
 
 ?>
-
-
-
-
